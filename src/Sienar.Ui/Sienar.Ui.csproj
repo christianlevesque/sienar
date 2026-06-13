@@ -28,7 +28,6 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8"/>
 		<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.8"/>
-		<PackageReference Include="MudBlazor" Version="7.15.0"/>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -38,6 +37,14 @@
 		<PackageReference
 			Condition=" '$(Configuration)' == 'Release' "
 			Include="Sienar.Utils" Version="0.1.1"/>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Ui\Tables\SortLabel.razor" />
+	  <UpToDateCheckInput Remove="Ui\Tables\Table.razor" />
+	  <UpToDateCheckInput Remove="Ui\Tables\TableToolbar.razor" />
+	  <UpToDateCheckInput Remove="Ui\Buttons\LoadingButton.razor" />
+	  <UpToDateCheckInput Remove="Ui\Buttons\ToggleButton.razor" />
 	</ItemGroup>
 
 </Project>

@@ -42,8 +42,7 @@ public class TestProjectPlugin : IPlugin
 	public void Configure()
 	{
 		_builder.Services
-			.AddDbContextForSienar<AppDbContext>(o => o.UseSienarDb())
-			.AddDefaultTheme();
+			.AddDbContextForSienar<AppDbContext>(o => o.UseSienarDb());
 
 		_routableAssemblyProvider.Add(typeof(TestProjectPlugin).Assembly);
 		_menuProvider.AddMenu();
