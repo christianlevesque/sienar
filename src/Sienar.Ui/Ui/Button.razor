@@ -1,0 +1,9 @@
+﻿@inherits BulmaElement
+
+<DynamicElement
+	Tag="@(string.IsNullOrEmpty(Href) ? "button" : "a")"
+	@attributes="@Attributes"
+	class="@Css"
+	href="@Href">
+	@ChildContent
+</DynamicElement>

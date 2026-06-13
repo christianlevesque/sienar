@@ -14,6 +14,6 @@ public abstract class BulmaElement : ComponentBase
 	/// <summary>
 	/// The HTML attributes to add to the rendered HTML
 	/// </summary>
-	[Parameter]
+	[Parameter(CaptureUnmatchedValues = true)]
 	public IReadOnlyDictionary<string, object>? Attributes { get; set; }
 }
