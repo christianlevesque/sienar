@@ -39,12 +39,4 @@
 			Include="Sienar.Utils" Version="0.1.1"/>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Ui\Tables\SortLabel.razor" />
-	  <UpToDateCheckInput Remove="Ui\Tables\Table.razor" />
-	  <UpToDateCheckInput Remove="Ui\Tables\TableToolbar.razor" />
-	  <UpToDateCheckInput Remove="Ui\Buttons\LoadingButton.razor" />
-	  <UpToDateCheckInput Remove="Ui\Buttons\ToggleButton.razor" />
-	</ItemGroup>
-
 </Project>
