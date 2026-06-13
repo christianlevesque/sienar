@@ -49,4 +49,11 @@ public readonly struct CssBuilder
 
 		return this;
 	}
+
+	/// <summary>
+	/// Builds the final CSS string
+	/// </summary>
+	/// <returns>The compiled CSS string</returns>
+	public string Build()
+		=> _sb.ToString().Trim();
 }
