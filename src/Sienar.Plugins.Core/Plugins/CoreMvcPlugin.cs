@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-
-namespace Sienar.Plugins;
+﻿namespace Sienar.Plugins;
 
 /// <summary>
 /// Configures the Sienar app to run as an MVC application with controllers, views, and Razor Pages
@@ -34,13 +32,15 @@ public class CoreMvcPlugin : IPlugin
 		_builder.Services.AddScoped<Notifier>();
 
 		// Add and configure MVC
-		var mvcbuilder = _builder.Services.AddMvc(o =>
-		{
-			foreach (var configurer in _mvcConfigurers)
+		var mvcbuilder = _builder.Services
+			.AddMvc(o =>
 			{
-				configurer.Configure(o);
-			}
-		});
+				foreach (var configurer in _mvcConfigurers)
+				{
+					configurer.Configure(o);
+				}
+			})
+			.AddRazorRuntimeCompilation();
 
 		foreach (var configurer in _additionalMvcConfigurers)
 		{

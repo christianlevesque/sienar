@@ -16,6 +16,11 @@ _ReSharper.*
 .nuget/
 *.log
 
+# Client
+wwwroot/
+node_modules/
+package-lock.json
+
 **/coverage.xml
 **/coveragereport
 

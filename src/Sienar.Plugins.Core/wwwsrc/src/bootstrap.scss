@@ -1,0 +1,17 @@
+@use 'sass:map';
+
+$primary: #594ae2;
+$secondary: #ff4081;
+
+// Use 16 equally spaced spacers instead of 5 variable ones
+$spacer: 1rem;
+$spacers: ();
+
+@for $i from 0 through 16 {
+	$spacers: map.set($spacers, $i, $i * 0.25rem);
+}
+
+@import 'bootstrap/scss/bootstrap';
+
+$bootstrap-icons-font-dir: 'http://localhost:5173/node_modules/bootstrap-icons/font/fonts';
+@import 'bootstrap-icons/font/bootstrap-icons';

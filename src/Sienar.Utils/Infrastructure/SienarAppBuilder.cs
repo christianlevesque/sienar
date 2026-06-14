@@ -31,6 +31,7 @@ public sealed class SienarAppBuilder
 			.AddSingleton<StyleProvider>()
 			.AddSingleton<RoleProvider>()
 			.AddSingleton<MiddlewareProvider>()
+			.AddSingleton<PartialProvider>()
 			.AddSingleton<IStatusActor<Startup>, StartupStatusActor>()
 			.AddLogging();
 	}
@@ -112,7 +113,8 @@ public sealed class SienarAppBuilder
 			.AddSingleton(sp.GetRequiredService<PluginDataProvider>())
 			.AddSingleton(sp.GetRequiredService<ScriptProvider>())
 			.AddSingleton(sp.GetRequiredService<StyleProvider>())
-			.AddSingleton(sp.GetRequiredService<RoleProvider>());
+			.AddSingleton(sp.GetRequiredService<RoleProvider>())
+			.AddSingleton(sp.GetRequiredService<PartialProvider>());
 
 		var app = _builder.Build();
 

@@ -5,6 +5,7 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>Sienar</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 
 		<PackageId>Sienar.Plugins.Core</PackageId>
 		<Title>Sienar.Plugins.Core</Title>
@@ -30,6 +31,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.28"/>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
 
 		<ProjectReference

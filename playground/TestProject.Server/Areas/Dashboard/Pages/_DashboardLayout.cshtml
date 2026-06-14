@@ -1,0 +1,74 @@
+@using Sienar.Menus
+@inject IOptions<SienarOptions> Options
+@inject IMenuGenerator MenuGenerator
+
+@* ReSharper disable once CollectionNeverUpdated.Local *@
+@inject PartialProvider PartialProvider
+
+@{
+	var menuName = ViewData.ContainsKey(CorePluginConstants.ViewData.Menu) ? ViewData[CorePluginConstants.ViewData.Menu]!.ToString()! : string.Empty;
+
+	var menus = await MenuGenerator.Create(menuName);
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<title>@ViewData[CorePluginConstants.ViewData.Title] | @Options.Value.SiteName</title>
+	<script src="http://localhost:5173/@@vite/client" type="module"></script>
+	<script src="http://localhost:5173/src/main.ts" type="module"></script>
+</head>
+
+<body>
+<div class="d-flex min-vh-100">
+	<div
+		id="menu"
+		class="menu offcanvas-lg offcanvas-start bg-dark text-light border-end border-dark p-4 d-flex flex-column"
+		tabindex="-1"
+		aria-labelledby="menu-title"
+		style="width: 300px">
+
+		@if (PartialProvider.TryGetValue(CorePluginConstants.Partials.OffcanvasHeader, out var menuHeader))
+		{
+			<partial name="@menuHeader"/>
+		}
+
+		<div class="offcanvas-body flex-grow-1">
+
+			<ul class="list-unstyled flex-grow-1">
+				@foreach (var menu in menus)
+				{
+					<li>
+						<a
+							href="@menu.Url"
+							class="d-block text-light text-decoration-none fs-4">
+							@if (!string.IsNullOrEmpty(menu.Icon))
+							{
+								<i class="me-4 bi bi-@menu.Icon"></i>
+							}
+
+							@menu.Text
+						</a>
+					</li>
+				}
+			</ul>
+
+			@if (PartialProvider.TryGetValue(CorePluginConstants.Partials.OffcanvasFooter, out var menuFooter))
+			{
+				<partial name="@menuFooter"/>
+			}
+		</div>
+
+	</div>
+
+	<div class="flex-grow-1">
+		@RenderBody()
+	</div>
+</div>
+
+<script asp-src-include="@(ViewContext.View.Path).js" asp-append-version="true" type="module"></script>
+</body>
+</html>

@@ -13,14 +13,14 @@ public static class MenuProviderExtensions
 	public static MenuProvider CreateMainMenu(this MenuProvider self)
 	{
 		self
-			.Access(IdentityMenus.Main)
+			.Access(string.Empty)
 			.AddWithNormalPriority(
 				new MenuLink
 				{
 					Text = "Dashboard",
-					// Icon = Icons.Material.Filled.Dashboard,
+					Icon = "hdd-stack-fill",
 					Url = DashboardUrls.Index,
-					RequireLoggedIn = true
+					RequireLoggedIn = false
 				});
 
 		return self;
