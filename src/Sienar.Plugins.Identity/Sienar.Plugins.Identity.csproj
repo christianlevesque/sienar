@@ -39,4 +39,33 @@
 			Include="Sienar.Plugins.Core" Version="0.1.1"/>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Pages\Account\ChangeEmail\ChangeEmailConfirm.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\ChangeEmail\ChangeEmailIndex.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\ChangeEmail\ChangeEmailRequested.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\ChangeEmail\ChangeEmailSuccessful.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\ChangePassword\ChangePasswordIndex.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\ChangePassword\ChangePasswordSuccessful.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\Confirm\ConfirmIndex.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\Confirm\ConfirmSuccessful.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\Delete.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\Deleted.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\Forbidden.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\ForgotPassword\ForgotPasswordIndex.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\ForgotPassword\ForgotPasswordSuccessful.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\Locked.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\Login.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\PersonalData.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\Register\RegisterIndex.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\Register\RegisterSuccessful.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\ResetPassword\ResetPasswordIndex.razor" />
+	  <UpToDateCheckInput Remove="Pages\Account\ResetPassword\ResetPasswordSuccessful.razor" />
+	  <UpToDateCheckInput Remove="Pages\DashboardIndex.razor" />
+	  <UpToDateCheckInput Remove="Pages\LockoutReasons\LockoutReasonsIndex.razor" />
+	  <UpToDateCheckInput Remove="Pages\LockoutReasons\LockoutReasonsUpsert.razor" />
+	  <UpToDateCheckInput Remove="Pages\Users\LockUser.razor" />
+	  <UpToDateCheckInput Remove="Pages\Users\UsersIndex.razor" />
+	  <UpToDateCheckInput Remove="Pages\Users\UsersUpsert.razor" />
+	</ItemGroup>
+
 </Project>

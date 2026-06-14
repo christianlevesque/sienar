@@ -34,7 +34,7 @@ public class CoreMvcPlugin : IPlugin
 		_builder.Services
 			.AddEndpointsApiExplorer()
 			.AddSwaggerGen()
-			.AddScoped<INotifier, DefaultNotifier>();
+			.AddScoped<Notifier>();
 
 		// Add and configure MVC
 		var mvcbuilder = _builder.Services.AddMvc(o =>

@@ -7,7 +7,7 @@ public abstract class UsernameUniqueValidator<T>
 	where T : class, ISienarIdentityUser<T>
 {
 	private readonly ISienarDbContext<T> _context;
-	private readonly INotifier _notifier;
+	private readonly Notifier _notifier;
 
 	/// <summary>
 	/// Creates a new instance of <c>UsernameUniqueValidator</c>
@@ -16,7 +16,7 @@ public abstract class UsernameUniqueValidator<T>
 	/// <param name="notifier">The notifier</param>
 	protected UsernameUniqueValidator(
 		ISienarDbContext<T> context,
-		INotifier notifier)
+		Notifier notifier)
 	{
 		_context = context;
 		_notifier = notifier;

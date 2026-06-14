@@ -5,9 +5,9 @@ namespace Sienar.Identity.Hooks;
 /// <exclude />
 public class AcceptTosValidator : IStateValidator<RegisterRequest>
 {
-	private readonly INotifier _notifier;
+	private readonly Notifier _notifier;
 
-	public AcceptTosValidator(INotifier notifier)
+	public AcceptTosValidator(Notifier notifier)
 	{
 		_notifier = notifier;
 	}

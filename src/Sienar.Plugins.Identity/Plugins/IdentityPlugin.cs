@@ -42,25 +42,11 @@ public class IdentityPlugin<TUser> : IPlugin
 
 	public void Configure()
 	{
-		SetupComponents();
 		SetupMenu();
 		SetupPluginData();
 		SetupRoutableAssemblies();
 		SetupStyles();
 		SetupServices();
-	}
-
-	private void SetupComponents()
-	{
-		_componentProvider
-			.Access(typeof(DashboardLayout))
-			.TryAddComponent<DrawerHeader>(DashboardLayoutSections.SidebarHeader)
-			.TryAddComponent<DrawerFooter>(DashboardLayoutSections.SidebarFooter);
-
-		_globalComponentProvider.DefaultLayout ??= typeof(DashboardLayout);
-		_globalComponentProvider.NotFoundView ??= typeof(NotFound);
-		_globalComponentProvider.UnauthorizedView ??= typeof(Unauthorized);
-		_globalComponentProvider.DefaultMenus = [IdentityMenus.Main, IdentityMenus.Info];
 	}
 	
 	private void SetupMenu()
@@ -92,8 +78,7 @@ public class IdentityPlugin<TUser> : IPlugin
 
 	private void SetupStyles()
 	{
-		_styleProvider.Add("/_content/Sienar.Ui/sienar.css");
-		_styleProvider.Add("/_content/Sienar.Ui/Sienar.Ui.bundle.scp.css");
+		
 	}
 
 	private void SetupServices()

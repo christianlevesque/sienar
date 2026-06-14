@@ -16,7 +16,7 @@ public class EnsureEmailUniqueOnRegister<T> :
 	/// <param name="notifier">The notifier</param>
 	public EnsureEmailUniqueOnRegister(
 		ISienarDbContext<T> context,
-		INotifier notifier)
+		Notifier notifier)
 		: base(context, notifier) {}
 
 	/// <inheritdoc />

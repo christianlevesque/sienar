@@ -7,11 +7,11 @@ public class LogoutProcessor<T> : IStatusProcessor<LogoutRequest>
 	where T : class, ISienarIdentityUser<T>
 {
 	private readonly ISignInManager<T> _signInManager;
-	private readonly INotifier _notifier;
+	private readonly Notifier _notifier;
 
 	public LogoutProcessor(
 		ISignInManager<T> signInManager,
-		INotifier notifier)
+		Notifier notifier)
 	{
 		_signInManager = signInManager;
 		_notifier = notifier;

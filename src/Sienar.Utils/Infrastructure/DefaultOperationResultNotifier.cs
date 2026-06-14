@@ -3,13 +3,13 @@
 /// <inheritdoc />
 public class DefaultOperationResultNotifier : IOperationResultNotifier
 {
-	private readonly INotifier _notifier;
+	private readonly Notifier _notifier;
 
 	/// <summary>
 	/// Creates a new instance of <c>DefaultOperationResultNotifier</c>
 	/// </summary>
 	/// <param name="notifier">The notifier</param>
-	public DefaultOperationResultNotifier(INotifier notifier)
+	public DefaultOperationResultNotifier(Notifier notifier)
 	{
 		_notifier = notifier;
 	}

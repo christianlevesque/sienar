@@ -7,11 +7,11 @@ public class ConcurrencyStampValidator<TEntity> : IStateValidator<TEntity>
 	where TEntity : class, IEntity
 {
 	private readonly IDbContext _context;
-	private readonly INotifier _notifier;
+	private readonly Notifier _notifier;
 
 	public ConcurrencyStampValidator(
 		IDbContext context,
-		INotifier notifier)
+		Notifier notifier)
 	{
 		_context = context;
 		_notifier = notifier;

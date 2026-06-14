@@ -1,37 +1,57 @@
 ﻿namespace Sienar.Infrastructure;
 
 /// <summary>
-/// Supplies various types of messages to the user
+/// Stores transient notifications
 /// </summary>
-public interface INotifier
+public class Notifier
 {
+	/// <summary>
+	/// The registered notifications
+	/// </summary>
+	public List<Notification> Notifications { get; } = [];
+
 	/// <summary>
 	/// Used to display a success message to the user
 	/// </summary>
 	/// <param name="message">The message to display</param>
-	void Success(string message);
+	public void Success(string message)
+	{
+		Notify(new Notification(message, NotificationType.Success));
+	}
 
 	/// <summary>
 	/// Used to display a warning message to the user
 	/// </summary>
 	/// <param name="message">The message to display</param>
-	void Warning(string message);
+	public void Warning(string message)
+	{
+		Notify(new Notification(message, NotificationType.Warning));
+	}
 
 	/// <summary>
 	/// Used to display an informational message to the user
 	/// </summary>
 	/// <param name="message">The message to display</param>
-	void Info(string message);
+	public void Info(string message)
+	{
+		Notify(new Notification(message, NotificationType.Info));
+	}
 
 	/// <summary>
 	/// Used to display an error message to the user
 	/// </summary>
 	/// <param name="message">The message to display</param>
-	void Error(string message);
+	public void Error(string message)
+	{
+		Notify(new Notification(message, NotificationType.Error));
+	}
 
 	/// <summary>
 	/// Used to display an arbitrary notification to the user
 	/// </summary>
 	/// <param name="notification">The notification to display</param>
-	void Notify(Notification notification);
+	public void Notify(Notification notification)
+	{
+		Notifications.Add(notification);
+	}
 }

@@ -6,11 +6,11 @@ namespace Sienar.Identity.Hooks;
 public class RegistrationOpenValidator : IStateValidator<RegisterRequest>
 {
 	private readonly SienarOptions _sienarOptions;
-	private readonly INotifier _notifier;
+	private readonly Notifier _notifier;
 
 	public RegistrationOpenValidator(
 		IOptions<SienarOptions> sienarOptions,
-		INotifier notifier)
+		Notifier notifier)
 	{
 		_sienarOptions = sienarOptions.Value;
 		_notifier = notifier;

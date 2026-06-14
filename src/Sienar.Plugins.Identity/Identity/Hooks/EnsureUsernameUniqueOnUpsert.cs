@@ -16,7 +16,7 @@ public class EnsureUsernameUniqueOnUpsert<T> :
 	/// <param name="notifier">The notifier</param>
 	public EnsureUsernameUniqueOnUpsert(
 		ISienarDbContext<T> context,
-		INotifier notifier)
+		Notifier notifier)
 		: base(context, notifier) {}
 
 	/// <inheritdoc />
