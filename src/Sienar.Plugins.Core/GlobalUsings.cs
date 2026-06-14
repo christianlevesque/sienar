@@ -16,4 +16,3 @@ global using Sienar.Extensions;
 global using Sienar.Hooks;
 global using Sienar.Infrastructure;
 global using Sienar.Security;
-global using Sienar.Ui;

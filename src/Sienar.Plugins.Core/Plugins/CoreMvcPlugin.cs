@@ -31,10 +31,7 @@ public class CoreMvcPlugin : IPlugin
 	public void Configure()
 	{
 		// Add MVC-adjacent services
-		_builder.Services
-			.AddEndpointsApiExplorer()
-			.AddSwaggerGen()
-			.AddScoped<Notifier>();
+		_builder.Services.AddScoped<Notifier>();
 
 		// Add and configure MVC
 		var mvcbuilder = _builder.Services.AddMvc(o =>
@@ -49,18 +46,6 @@ public class CoreMvcPlugin : IPlugin
 		{
 			configurer.Configure(mvcbuilder);
 		}
-
-		_middlewareProvider.AddWithPriority(
-			Priority.High,
-			app =>
-			{
-				if (app.Environment.IsDevelopment())
-				{
-					app
-						.UseSwagger()
-						.UseSwaggerUI();
-				}
-			});
 
 		_middlewareProvider.AddWithPriority(
 			Priority.Lowest,

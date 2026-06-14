@@ -30,7 +30,6 @@ public class CorePlugin : IPlugin
 			builder
 				.AddPlugin<CoreSecurityPlugin>()
 				.AddPlugin<CoreMvcPlugin>()
-				.AddPlugin<CoreBlazorPlugin>()
 				.AddStartupServices(sp => sp.AddStartupProcessor<EnsureBaseDirectoryCreated>());
 		}
 	}

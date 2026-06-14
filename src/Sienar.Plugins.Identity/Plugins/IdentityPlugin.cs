@@ -12,39 +12,23 @@ public class IdentityPlugin<TUser> : IPlugin
 	where TUser : class, ISienarIdentityUser<TUser>, new()
 {
 	private readonly WebApplicationBuilder _builder;
-	private readonly IConfiguration _configuration;
-	private readonly ComponentProvider _componentProvider;
-	private readonly GlobalComponentProvider _globalComponentProvider;
 	private readonly MenuProvider _menuProvider;
 	private readonly PluginDataProvider _pluginDataProvider;
-	private readonly RoutableAssemblyProvider _routableAssemblyProvider;
-	private readonly StyleProvider _styleProvider;
 
 	public IdentityPlugin(
 		WebApplicationBuilder builder,
-		IConfiguration configuration,
-		ComponentProvider componentProvider,
-		GlobalComponentProvider globalComponentProvider,
 		MenuProvider menuProvider,
-		PluginDataProvider pluginDataProvider,
-		RoutableAssemblyProvider routableAssemblyProvider,
-		StyleProvider styleProvider)
+		PluginDataProvider pluginDataProvider)
 	{
 		_builder = builder;
-		_configuration = configuration;
-		_componentProvider = componentProvider;
-		_globalComponentProvider = globalComponentProvider;
 		_menuProvider = menuProvider;
 		_pluginDataProvider = pluginDataProvider;
-		_routableAssemblyProvider = routableAssemblyProvider;
-		_styleProvider = styleProvider;
 	}
 
 	public void Configure()
 	{
 		SetupMenu();
 		SetupPluginData();
-		SetupRoutableAssemblies();
 		SetupStyles();
 		SetupServices();
 	}
@@ -69,11 +53,6 @@ public class IdentityPlugin<TUser> : IPlugin
 			Homepage = "https://sienar.io",
 			Version = Version.Parse("0.1.1")
 		});
-	}
-
-	private void SetupRoutableAssemblies()
-	{
-		_routableAssemblyProvider.Add(typeof(IdentityPlugin<TUser>).Assembly);
 	}
 
 	private void SetupStyles()

@@ -112,8 +112,7 @@ public sealed class SienarAppBuilder
 			.AddSingleton(sp.GetRequiredService<PluginDataProvider>())
 			.AddSingleton(sp.GetRequiredService<ScriptProvider>())
 			.AddSingleton(sp.GetRequiredService<StyleProvider>())
-			.AddSingleton(sp.GetRequiredService<RoleProvider>())
-			.AddSingleton<LayoutProvider>();
+			.AddSingleton(sp.GetRequiredService<RoleProvider>());
 
 		var app = _builder.Build();
 

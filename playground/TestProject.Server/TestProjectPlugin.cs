@@ -14,18 +14,15 @@ namespace TestProject;
 public class TestProjectPlugin : IPlugin
 {
 	private readonly WebApplicationBuilder _builder;
-	private readonly RoutableAssemblyProvider _routableAssemblyProvider;
 	private readonly MenuProvider _menuProvider;
 	private readonly StyleProvider _styleProvider;
 
 	public TestProjectPlugin(
 		WebApplicationBuilder builder,
-		RoutableAssemblyProvider routableAssemblyProvider,
 		MenuProvider menuProvider,
 		StyleProvider styleProvider)
 	{
 		_builder = builder;
-		_routableAssemblyProvider = routableAssemblyProvider;
 		_menuProvider = menuProvider;
 		_styleProvider = styleProvider;
 	}
@@ -35,7 +32,6 @@ public class TestProjectPlugin : IPlugin
 		_builder.Services
 			.AddDbContextForSienar<AppDbContext>(o => o.UseSienarDb());
 
-		_routableAssemblyProvider.Add(typeof(TestProjectPlugin).Assembly);
 		_menuProvider.AddMenu();
 
 		ConfigureStyles();
