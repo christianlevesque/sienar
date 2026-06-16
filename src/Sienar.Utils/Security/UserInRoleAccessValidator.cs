@@ -14,14 +14,16 @@ public abstract class UserInRoleAccessValidator<T> : IAccessValidator<T>
 	}
 
 	/// <inheritdoc />
-	public async Task Validate(
+	public Task Validate(
 		AccessValidationContext context,
 		ActionType actionType,
 		T? input)
 	{
-		if (await _userAccessor.UserInRole(Role))
+		if (_userAccessor.UserInRole(Role))
 		{
 			context.Approve();
 		}
+
+		return Task.CompletedTask;
 	}
 }

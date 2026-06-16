@@ -22,7 +22,7 @@ public class ChangePasswordProcessor<T> : IStatusProcessor<ChangePasswordRequest
 
 	public async Task<OperationResult<bool>> Process(ChangePasswordRequest request)
 	{
-		var userId = await _userAccessor.GetUserId();
+		var userId = _userAccessor.GetUserId();
 		if (!userId.HasValue)
 		{
 			return new(

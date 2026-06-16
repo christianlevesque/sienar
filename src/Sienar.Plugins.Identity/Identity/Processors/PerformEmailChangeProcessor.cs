@@ -29,7 +29,7 @@ public class PerformEmailChangeProcessor<T>
 
 	public async Task<OperationResult<bool>> Process(PerformEmailChangeRequest request)
 	{
-		var userId = await _userAccessor.GetUserId();
+		var userId = _userAccessor.GetUserId();
 		if (!userId.HasValue)
 		{
 			return new(

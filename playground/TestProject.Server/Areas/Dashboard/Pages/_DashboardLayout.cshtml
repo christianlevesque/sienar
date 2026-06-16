@@ -8,7 +8,7 @@
 @{
 	var menuName = ViewData.ContainsKey(CorePluginConstants.ViewData.Menu) ? ViewData[CorePluginConstants.ViewData.Menu]!.ToString()! : string.Empty;
 
-	var menus = await MenuGenerator.Create(menuName);
+	var menus = MenuGenerator.Create(menuName);
 }
 
 <!DOCTYPE html>

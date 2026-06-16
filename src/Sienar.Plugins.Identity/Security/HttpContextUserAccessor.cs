@@ -3,43 +3,48 @@ using Microsoft.AspNetCore.Http;
 
 namespace Sienar.Security;
 
+/// <summary>
+/// Retrieves user information based on the HTTP context
+/// </summary>
 public class HttpContextUserAccessor : IUserAccessor
 {
-	protected readonly HttpContext HttpContext;
+	private readonly HttpContext _context;
 
-	public HttpContextUserAccessor(IHttpContextAccessor httpContextAccessor)
+	/// <summary>
+	/// Creates a new instance of <c>HttpContextUserAccessor</c>
+	/// </summary>
+	/// <param name="httpContextAccessor">The HTTP context accessor</param>
+	public HttpContextUserAccessor(
+		IHttpContextAccessor httpContextAccessor)
 	{
-		HttpContext = httpContextAccessor.HttpContext!;
+		_context = httpContextAccessor.HttpContext!;
 	}
 
 	/// <inheritdoc />
-	public Task<bool> IsSignedIn() => Task.FromResult(
-		HttpContext.User.Identity?.IsAuthenticated ?? false);
+	public bool IsSignedIn() => _context.User.Identity?.IsAuthenticated ?? false;
 
 	/// <inheritdoc />
-	public virtual Task<int?> GetUserId()
+	public int? GetUserId()
 	{
-		var claim = HttpContext.User.Claims
+		var claim = _context.User.Claims
 			.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
-		int? id = claim is null
+		return claim is null
 			? null
 			: int.Parse(claim.Value);
-		return Task.FromResult(id);
 	}
 
 	/// <inheritdoc />
-	public virtual Task<string?> GetUsername()
+	public string? GetUsername()
 	{
-		var claim = HttpContext.User.Claims
-			.FirstOrDefault(c => c.Type == ClaimTypes.Name);
-		return Task.FromResult(claim?.Value);
+		return _context.User.Claims
+			.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
 	}
 
 	/// <inheritdoc />
-	public virtual Task<ClaimsPrincipal> GetUserClaimsPrincipal()
-		=> Task.FromResult(HttpContext.User);
+	public ClaimsPrincipal GetUserClaimsPrincipal()
+		=> _context.User;
 
 	/// <inheritdoc />
-	public Task<bool> UserInRole(string roleName)
-		=> Task.FromResult(HttpContext.User.IsInRole(roleName));
+	public bool UserInRole(string roleName)
+		=> _context.User.IsInRole(roleName);
 }

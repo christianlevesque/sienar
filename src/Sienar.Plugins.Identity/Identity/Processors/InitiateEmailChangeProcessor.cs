@@ -31,7 +31,7 @@ public class InitiateEmailChangeProcessor<T> : IStatusProcessor<InitiateEmailCha
 
 	public async Task<OperationResult<bool>> Process(InitiateEmailChangeRequest request)
 	{
-		var userId = await _userAccessor.GetUserId();
+		var userId = _userAccessor.GetUserId();
 		if (!userId.HasValue)
 		{
 			return new(

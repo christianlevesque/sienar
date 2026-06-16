@@ -17,19 +17,19 @@ public class DefaultMenuGenerator : IMenuGenerator
 	}
 
 	/// <inheritdoc />
-	public Task<List<MenuLink>> Create(string name)
+	public List<MenuLink> Create(string name)
 	{
 		var linkDictionary = _provider.Access(name);
 		return ProcessNavLinks(linkDictionary.AggregatePrioritized());
 	}
 
-	private async Task<List<MenuLink>> ProcessNavLinks(List<MenuLink> navLinks)
+	private List<MenuLink> ProcessNavLinks(List<MenuLink> navLinks)
 	{
 		var includedLinks = new List<MenuLink>();
 
 		foreach (var link in navLinks)
 		{
-			if (!await UserIsAuthorized(link))
+			if (!UserIsAuthorized(link))
 			{
 				continue;
 			}
@@ -38,7 +38,7 @@ public class DefaultMenuGenerator : IMenuGenerator
 			{
 				// TODO: #117
 				link.Text ??= link.ChildMenu;
-				link.Sublinks = await Create(link.ChildMenu);
+				link.Sublinks = Create(link.ChildMenu);
 			}
 
 			includedLinks.Add(link);
@@ -47,15 +47,15 @@ public class DefaultMenuGenerator : IMenuGenerator
 		return includedLinks;
 	}
 
-	private async Task<bool> UserIsAuthorized(MenuLink menuLink)
+	private bool UserIsAuthorized(MenuLink menuLink)
 	{
-		if (menuLink.RequireLoggedIn && !await _userAccessor.IsSignedIn()) return false;
-		if (menuLink.RequireLoggedOut && await _userAccessor.IsSignedIn()) return false;
+		if (menuLink.RequireLoggedIn && !_userAccessor.IsSignedIn()) return false;
+		if (menuLink.RequireLoggedOut && _userAccessor.IsSignedIn()) return false;
 		if (menuLink.Roles is null) return true;
 
 		foreach (var role in menuLink.Roles)
 		{
-			if (await _userAccessor.UserInRole(role))
+			if (_userAccessor.UserInRole(role))
 			{
 				if (menuLink.AllRolesRequired)
 				{

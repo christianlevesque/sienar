@@ -14,24 +14,24 @@ public class GetAccountDataProcessor : IResultProcessor<AccountDataResult>
 		_userAccessor = userAccessor;
 	}
 
-	public async Task<OperationResult<AccountDataResult>> Process()
+	public Task<OperationResult<AccountDataResult>> Process()
 	{
-		if (!await _userAccessor.IsSignedIn())
+		if (!_userAccessor.IsSignedIn())
 		{
-			return new(OperationStatus.Unauthorized);
+			return Task.FromResult(new OperationResult<AccountDataResult>(OperationStatus.Unauthorized));
 		}
 
-		var roles = (await _userAccessor.GetUserClaimsPrincipal()).Claims
+		var roles = (_userAccessor.GetUserClaimsPrincipal()).Claims
 			.Where(c => c.Type == ClaimTypes.Role)
 			.Select(c => c.Value)
 			.ToList();
 
 		var result = new AccountDataResult
 		{
-			Username = (await _userAccessor.GetUsername())!,
+			Username = _userAccessor.GetUsername()!,
 			Roles = roles
 		};
 
-		return new(result: result);
+		return Task.FromResult(new OperationResult<AccountDataResult>(result: result));
 	}
 }

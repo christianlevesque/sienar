@@ -25,7 +25,7 @@ public class DeleteAccountProcessor<T> : IStatusProcessor<DeleteAccountRequest>
 
 	public async Task<OperationResult<bool>> Process(DeleteAccountRequest request)
 	{
-		var userId = await _userAccessor.GetUserId();
+		var userId = _userAccessor.GetUserId();
 		if (!userId.HasValue)
 		{
 			return new(

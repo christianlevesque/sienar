@@ -25,7 +25,7 @@ public class RemoveIdentityRelationsOnOwnAccountDeleted<T> :
 	/// <inheritdoc />
 	public async Task Handle(DeleteAccountRequest request)
 	{
-		var userId = await _userAccessor.GetUserId();
+		var userId = _userAccessor.GetUserId();
 		var user = await Context.Users.FindAsync(userId!.Value);
 		await RemoveRelations(user!);
 	}

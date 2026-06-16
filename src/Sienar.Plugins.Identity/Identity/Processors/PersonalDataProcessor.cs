@@ -24,7 +24,7 @@ public class PersonalDataProcessor<T> : IResultProcessor<PersonalDataResult>
 
 	public async Task<OperationResult<PersonalDataResult>> Process()
 	{
-		var userId = await _userAccessor.GetUserId();
+		var userId = _userAccessor.GetUserId();
 		if (!userId.HasValue)
 		{
 			return new(
