@@ -14,15 +14,18 @@ public class IdentityPlugin<TUser> : IPlugin
 	private readonly WebApplicationBuilder _builder;
 	private readonly MenuProvider _menuProvider;
 	private readonly PluginDataProvider _pluginDataProvider;
+	private readonly PartialProvider _partialProvider;
 
 	public IdentityPlugin(
 		WebApplicationBuilder builder,
 		MenuProvider menuProvider,
-		PluginDataProvider pluginDataProvider)
+		PluginDataProvider pluginDataProvider,
+		PartialProvider partialProvider)
 	{
 		_builder = builder;
 		_menuProvider = menuProvider;
 		_pluginDataProvider = pluginDataProvider;
+		_partialProvider = partialProvider;
 	}
 
 	public void Configure()
@@ -31,6 +34,8 @@ public class IdentityPlugin<TUser> : IPlugin
 		SetupPluginData();
 		SetupStyles();
 		SetupServices();
+
+		_partialProvider[CorePluginConstants.Partials.OffcanvasFooter] = "IdentityFooter";
 	}
 	
 	private void SetupMenu()

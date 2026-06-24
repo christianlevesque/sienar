@@ -1,11 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<RootNamespace>Sienar</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 
 		<PackageId>Sienar.Plugins.Core</PackageId>
 		<Title>Sienar.Plugins.Core</Title>

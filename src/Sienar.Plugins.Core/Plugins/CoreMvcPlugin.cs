@@ -39,8 +39,8 @@ public class CoreMvcPlugin : IPlugin
 				{
 					configurer.Configure(o);
 				}
-			})
-			.AddRazorRuntimeCompilation();
+			});
+			// .AddRazorRuntimeCompilation();
 
 		foreach (var configurer in _additionalMvcConfigurers)
 		{
