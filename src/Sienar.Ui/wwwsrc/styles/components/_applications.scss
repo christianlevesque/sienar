@@ -1,6 +1,6 @@
 ﻿@use 'sass:map';
-@use '@ui/styles/variables';
-@use '@ui/styles/functions';
+@use '../variables';
+@use '../functions';
 
 .app {
 	--app-background-color: var(--color-light);

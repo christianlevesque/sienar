@@ -1,9 +1,6 @@
-@using Sienar.Menus
 @inject IOptions<SienarOptions> Options
 @inject IMenuGenerator MenuGenerator
-
-@* ReSharper disable once CollectionNeverUpdated.Local *@
-@inject PartialProvider PartialProvider
+@inject IUserAccessor UserAccessor
 
 @{
 	var menuName = ViewData.ContainsKey(CorePluginConstants.ViewData.Menu) ? ViewData[CorePluginConstants.ViewData.Menu]!.ToString()! : string.Empty;
@@ -31,11 +28,6 @@
 		aria-labelledby="menu-title"
 		style="width: 300px">
 
-		@if (PartialProvider.TryGetValue(CorePluginConstants.Partials.OffcanvasHeader, out var menuHeader))
-		{
-			<partial name="@menuHeader"/>
-		}
-
 		<div class="offcanvas-body flex-grow-1 flex-column">
 
 			<ul class="list-unstyled flex-grow-1">
@@ -56,10 +48,35 @@
 				}
 			</ul>
 
-			@if (PartialProvider.TryGetValue(CorePluginConstants.Partials.OffcanvasFooter, out var menuFooter))
-			{
-				<partial name="@menuFooter"/>
-			}
+			<footer class="conainer-fluid">
+				<div class="row gx-0">
+					@if (UserAccessor.IsSignedIn())
+					{
+						<a
+							class="col-12 btn btn-primary"
+							asp-area="Dashboard"
+							asp-page="/Account/LogOut">
+							Log out
+						</a>
+					}
+					else
+					{
+						<a
+							class="col-12 btn btn-outline-secondary"
+							asp-area="Dashboard"
+							asp-page="/Account/Register">
+							Register
+						</a>
+						<a
+							class="col-12 btn btn-primary"
+							asp-area="Dashboard"
+							asp-page="/Account/Login">
+							Log in
+						</a>
+					}
+				</div>
+			</footer>
+
 		</div>
 
 	</div>

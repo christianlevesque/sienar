@@ -1,7 +1,12 @@
 @page
+@model IndexModel
 
 @{
 	ViewData[CorePluginConstants.ViewData.Title] = "Home";
 }
 
 <p class="text-primary">Dashboard index</p>
+
+<form>
+	<text-input asp-for="Name"/>
+</form>
