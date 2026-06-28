@@ -5,6 +5,9 @@ export default defineConfig({
 	build: {
 		outDir: '../wwwroot'
 	},
+	server: {
+		origin: 'http://localhost:5173'
+	},
 	css: {
 		preprocessorOptions: {
 			scss: {
