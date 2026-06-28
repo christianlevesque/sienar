@@ -2,7 +2,7 @@
 @use '../variables';
 @use '../functions';
 
-.button {
+.btn {
 	--button-background-color: var(--color-heavy);
 	--button-border-color: var(--color-heavy);
 	--button-border-style: solid;
@@ -22,6 +22,7 @@
 	display: inline-block;
 	cursor: pointer;
 	text-decoration: none;
+	text-align: center;
 	padding: var(--button-padding-y) var(--button-padding-x);
 
 	transition:
@@ -29,12 +30,17 @@
 		background-color var(--transition),
 		color var(--transition);
 
-	&.button--icon {
+	&:hover {
+		--button-background-color: var(--color-heavy-darken);
+		--button-border-color: var(--color-heavy-darken);
+	}
+
+	&.icon {
 		height: 40px;
 		aspect-ratio: 1/1;
 	}
 
-	& .icon {
+	& .mdi {
 		&:first-child {
 			padding-left: 0;
 		}
@@ -44,18 +50,7 @@
 	}
 
 	// Themed styles
-	&.button--solid {
-		--button-background-color: var(--color-heavy);
-		--button-border-color: var(--color-heavy);
-		--button-text-color: #{functions.get-contrasting-text-color('heavy')};
-
-		&:hover {
-			--button-background-color: var(--color-heavy-darken);
-			--button-border-color: var(--color-heavy-darken);
-		}
-	}
-
-	&.button--outlined {
+	&.outlined {
 		--button-background-color: transparent;
 		--button-border-color: var(--color-heavy);
 		--button-text-color: var(--color-heavy);
@@ -65,7 +60,7 @@
 		}
 	}
 
-	&.button--text {
+	&.text {
 		--button-background-color: transparent;
 		--button-border-color: transparent;
 		--button-text-color: var(--color-heavy);
@@ -76,7 +71,8 @@
 	}
 
 	@each $color in map.keys(variables.$theme-colors) {
-		&.button--#{$color}.button--solid {
+		// Solid
+		&.#{$color} {
 			--button-background-color: var(--color-#{$color});
 			--button-border-color: var(--color-#{$color});
 			--button-text-color: #{functions.get-contrasting-text-color($color)};
@@ -87,7 +83,7 @@
 			}
 		}
 
-		&.button--#{$color}.button--outlined {
+		&.#{$color}.outlined {
 			--button-background-color: transparent;
 			--button-border-color: var(--color-#{$color});
 			--button-text-color: var(--color-#{$color});
@@ -97,7 +93,7 @@
 			}
 		}
 
-		&.button--#{$color}.button--text {
+		&.#{$color}.text {
 			--button-background-color: transparent;
 			--button-border-color: transparent;
 			--button-text-color: var(--color-#{$color});
