@@ -20,26 +20,23 @@
 </head>
 
 <body>
-<div class="d-flex min-vh-100">
-	<div
-		id="menu"
-		class="menu offcanvas-lg offcanvas-start bg-dark text-light border-end border-dark p-4 d-flex flex-column"
-		tabindex="-1"
-		aria-labelledby="menu-title"
-		style="width: 300px">
-
-		<div class="offcanvas-body flex-grow-1 flex-column">
-
-			<ul class="list-unstyled flex-grow-1">
+<div
+	id="app"
+	class="app d-flex flex-row">
+	<div class="sidebar">
+		<div class="flex-grow-1">
+			<ul class="menu menu--heavy">
 				@foreach (var menu in menus)
 				{
-					<li>
+					<li class="menu__item menu__item--heavy">
 						<a
-							href="@menu.Url"
-							class="d-block text-light text-decoration-none fs-4">
+							class="menu__item-button"
+							href="@menu.Url">
 							@if (!string.IsNullOrEmpty(menu.Icon))
 							{
-								<i class="me-4 bi bi-@menu.Icon"></i>
+								<span class="menu__item-icon">
+									<i class="mr-4 mdi mdi-@menu.Icon"></i>
+								</span>
 							}
 
 							@menu.Text
@@ -47,44 +44,53 @@
 					</li>
 				}
 			</ul>
-
-			<footer class="conainer-fluid">
-				<div class="row gx-0">
-					@if (UserAccessor.IsSignedIn())
-					{
-						<a
-							class="col-12 btn btn-primary"
-							asp-area="Dashboard"
-							asp-page="/Account/LogOut">
-							Log out
-						</a>
-					}
-					else
-					{
-						<a
-							class="col-12 btn btn-outline-secondary"
-							asp-area="Dashboard"
-							asp-page="/Account/Register">
-							Register
-						</a>
-						<a
-							class="col-12 btn btn-primary"
-							asp-area="Dashboard"
-							asp-page="/Account/Login">
-							Log in
-						</a>
-					}
-				</div>
-			</footer>
-
 		</div>
 
+		<div>
+			@if (UserAccessor.IsSignedIn())
+			{
+				<a
+					class="button button--primary d-block"
+					asp-area="Dashboard"
+					asp-page="/Account/LogOut">
+					Log out
+				</a>
+			}
+			else
+			{
+				<a
+					class="btn secondary outlined d-block mb-4"
+					asp-area="Dashboard"
+					asp-page="/Account/Register">
+					Register
+				</a>
+				<a
+					class="btn primary d-block"
+					asp-area="Dashboard"
+					asp-page="/Account/Login">
+					Log in
+				</a>
+			}
+		</div>
 	</div>
 
-	<div class="flex-grow-1">
-		@RenderBody()
+	<div class="window">
+		<header class="appbar">
+			<button class="d-lg-none btn primary text">
+				<i class="mdi mdi-menu"></i>
+			</button>
+		</header>
+
+		<main class="main">
+			<container class="p-4">
+				@RenderBody()
+			</container>
+		</main>
 	</div>
 </div>
+
+<div id="notification-container" class="notifications"></div>
+<div id="modal-container" class="modal-container"></div>
 
 <script asp-src-include="@(ViewContext.View.Path).js" asp-append-version="true" type="module"></script>
 </body>
