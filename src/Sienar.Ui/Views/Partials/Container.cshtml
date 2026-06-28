@@ -1,0 +1,14 @@
+﻿@model Sienar.Ui.Containers.ContainerTagHelperModel
+
+@{
+	var css = new CssBuilder()
+		.AddClasses(Model.Attributes)
+		.AddClasses("container")
+		.AddClasses($"container--{Model.MaxWidth?.ToString().ToLowerInvariant()}", Model.MaxWidth is not null)
+		.AddClasses($"container--{Model.Alignment?.ToString().ToLowerInvariant()}", Model.Alignment is not null)
+		.Build();
+}
+
+<@Model.Tag class="@css" @Model.BuildAttributes()>
+	@Model.ChildContent
+</@Model.Tag>

@@ -1,0 +1,137 @@
+﻿@use 'sass:map';
+@use '../variables';
+@use '../functions';
+
+.button {
+	--button-background-color: var(--color-heavy);
+	--button-border-color: var(--color-heavy);
+	--button-border-style: solid;
+	--button-border-width: 1px;
+	--button-padding-x: var(--spacer-2);
+	--button-padding-y: var(--spacer-2);
+	--button-text-color: #{functions.get-contrasting-text-color('heavy')};
+
+	border-width: var(--button-border-width);
+	border-style: var(--button-border-style);
+	border-color: var(--button-border-color);
+	border-radius: var(--border-radius);
+
+	background-color: var(--button-background-color);
+	color: var(--button-text-color);
+
+	display: inline-block;
+	cursor: pointer;
+	text-decoration: none;
+	padding: var(--button-padding-y) var(--button-padding-x);
+
+	transition:
+		border-color var(--transition),
+		background-color var(--transition),
+		color var(--transition);
+
+	&.button--icon {
+		height: 40px;
+		aspect-ratio: 1/1;
+	}
+
+	& .icon {
+		&:first-child {
+			padding-left: 0;
+		}
+		&:last-child {
+			padding-right: 0;
+		}
+	}
+
+	// Themed styles
+	&.button--solid {
+		--button-background-color: var(--color-heavy);
+		--button-border-color: var(--color-heavy);
+		--button-text-color: #{functions.get-contrasting-text-color('heavy')};
+
+		&:hover {
+			--button-background-color: var(--color-heavy-darken);
+			--button-border-color: var(--color-heavy-darken);
+		}
+	}
+
+	&.button--outlined {
+		--button-background-color: transparent;
+		--button-border-color: var(--color-heavy);
+		--button-text-color: var(--color-heavy);
+
+		&:hover {
+			--button-background-color: var(--color-heavy-transparent);
+		}
+	}
+
+	&.button--text {
+		--button-background-color: transparent;
+		--button-border-color: transparent;
+		--button-text-color: var(--color-heavy);
+
+		&:hover {
+			--button-background-color: var(--color-heavy-transparent);
+		}
+	}
+
+	@each $color in map.keys(variables.$theme-colors) {
+		&.button--#{$color}.button--solid {
+			--button-background-color: var(--color-#{$color});
+			--button-border-color: var(--color-#{$color});
+			--button-text-color: #{functions.get-contrasting-text-color($color)};
+
+			&:hover {
+				--button-background-color: var(--color-#{$color}-darken);
+				--button-border-color: var(--color-#{$color}-darken);
+			}
+		}
+
+		&.button--#{$color}.button--outlined {
+			--button-background-color: transparent;
+			--button-border-color: var(--color-#{$color});
+			--button-text-color: var(--color-#{$color});
+
+			&:hover {
+				--button-background-color: var(--color-#{$color}-transparent);
+			}
+		}
+
+		&.button--#{$color}.button--text {
+			--button-background-color: transparent;
+			--button-border-color: transparent;
+			--button-text-color: var(--color-#{$color});
+
+			&:hover {
+				--button-background-color: var(--color-#{$color}-transparent);
+			}
+		}
+	}
+}
+
+.dismiss-button {
+	--dismiss-button-background-color: transparent;
+	--dismiss-button-text-color: var(--color-heavy);
+
+	background: var(--dismiss-button-background-color);
+	color: var(--dismiss-button-text-color);
+
+	border: none;
+	cursor: pointer;
+	aspect-ratio: 1/1;
+	border-radius: 9999px;
+
+	&:hover {
+		--notification-close-button-background-color: var(--color-heavy-transparent);
+	}
+
+	@each $color in map.keys(variables.$theme-colors) {
+		&.dismiss-button--#{$color} {
+			--dismiss-button-text-color: var(--color-#{$color});
+
+			&:hover {
+				--dismiss-button-background-color: var(--color-#{$color}-transparent);
+			}
+		}
+	}
+}

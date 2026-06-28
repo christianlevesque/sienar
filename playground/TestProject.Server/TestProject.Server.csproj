@@ -8,6 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\src\Sienar.Ui\Sienar.Ui.csproj" />
 		<ProjectReference Include="..\..\src\Sienar.Plugins.Identity\Sienar.Plugins.Identity.csproj" />
 		<ProjectReference Include="..\..\src\Sienar.Plugins.MailKit\Sienar.Plugins.MailKit.csproj" />
 		<ProjectReference Include="..\TestProject.Data\TestProject.Data.csproj" />

@@ -1,0 +1,195 @@
+﻿@use 'sass:map';
+@use '../variables';
+
+// region Form Field
+
+.form-field {
+	--form-field-margin-bottom: var(--spacer-8);
+	--form-field-text-color: var(--color-heavy);
+
+	--form-field-input-background-color: var(--color-white);
+	--form-field-input-border-color: var(--color-light);
+	--form-field-input-border-style: solid;
+	--form-field-input-border-width: 1px;
+	--form-field-input-border-radius: var(--border-radius);
+	--form-field-input-padding-x: var(--spacer-3);
+	--form-field-input-padding-y: var(--spacer-3);
+	--form-field-input-text-color: var(--color-heavy);
+
+	--form-field-label-margin-bottom: var(--spacer-2);
+
+	margin-bottom: var(--form-field-margin-bottom);
+}
+
+.form-field__label {
+	margin-bottom: var(--form-field-label-margin-bottom);
+	color: var(--form-field-text-color);
+
+	display: block;
+
+	transition: color var(--transition),
+	border-color var(--transition);
+}
+
+.form-field__input-wrapper {
+	background-color: var(--form-field-input-background-color);
+	border-color: var(--form-field-input-border-color);
+	border-style: var(--form-field-input-border-style);
+	border-width: var(--form-field-input-border-width);
+	border-radius: var(--form-field-input-border-radius);
+	padding: var(--form-field-input-padding-y) var(--form-field-input-padding-x);
+
+	position: relative;
+	display: flex;
+	align-items: stretch;
+}
+
+.form-field__input {
+	color: var(--form-field-text-color);
+
+	appearance: none;
+	outline: none;
+	border: none;
+	display: block;
+	flex-grow: 1;
+	z-index: 1;
+
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus,
+	&:-webkit-autofill:active{
+		box-shadow: 0 0 0 1000px var(--form-field-input-background-color) inset !important;
+	}
+}
+
+.form-field__input-left-icon,
+.form-field__input-right-icon {
+	display: flex;
+	width: 30px;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+	color: var(--form-field-text-color);
+	transition: color var(--transition);
+	z-index: 2;
+
+	// Combining display: flex, centered justify and align, and line-height 1px
+	// causes the icon to add no vertical space to the input wrapper
+	line-height: 1px;
+}
+
+.form-field__input-left-icon {
+	margin-right: var(--form-field-input-padding-x);
+}
+
+.form-field__input-right-icon {
+	margin-left: var(--form-field-input-padding-x);
+}
+
+@each $color in map.keys(variables.$theme-colors) {
+	.form-field--#{$color}.form-field--focused,
+	.form-field--#{$color}.form-field--focused .form-field__input-left-icon,
+	.form-field--#{$color}.form-field--focused .form-field__input-right-icon {
+		--form-field-text-color: var(--color-#{$color});
+		--form-field-input-border-color: var(--color-#{$color});
+	}
+}
+
+.form-field--invalid {
+	--form-field-input-border-color: var(--color-error);
+
+	&.form-field--focused,
+	&.form-field--focused .form-field__input-left-icon,
+	&.form-field__focused .form-field__input-right-icon{
+		--form-field-text-color: var(--color-error);
+		--form-field-input-border-color: var(--color-error);
+	}
+}
+
+.form-field--valid.form-field--focused {
+	--form-field-input-border-color: var(--color-success);
+	--form-field-text-color: var(--color-success);
+}
+
+.form-field__input[type='datetime-local'] {
+	&::-webkit-calendar-picker-indicator {
+		display: none;
+		-webkit-appearance: none;
+	}
+}
+
+select.form-field__input {
+	--form-field-select-margin-x: calc(-1 * var(--form-field-input-padding-x));
+	--form-field-select-margin-y: calc(-1 * var(--form-field-input-padding-y));
+
+	margin: var(--form-field-select-margin-y) var(--form-field-select-margin-x);
+	padding: var(--form-field-input-padding-y) var(--form-field-input-padding-x);
+
+	&.form-field__input--has-left-icon {
+		margin-left: calc(-1 * (2 * var(--form-field-input-padding-x) + 30px));
+		padding-left: calc(2 * var(--form-field-input-padding-x) + 30px);
+		z-index: 0;
+	}
+
+	.form-field--focused & {
+		--form-field-text-color: var(--color-heavy);
+	}
+}
+
+// endregion
+
+// region Form Check/Radio
+
+.check-radio {
+	--checkbox-margin-bottom: var(--spacer-2);
+
+	--checkbox-input-color: var(--color-heavy);
+	--checkbox-input-size: 24px;
+	--checkbox-input-margin-right: var(--spacer-3);
+
+	display: flex;
+	align-items: center;
+	margin-bottom: var(--checkbox-margin-bottom);
+}
+
+.check-radio__input {
+	accent-color: var(--checkbox-input-color);
+	margin-right: var(--checkbox-input-margin-right);
+	width: var(--checkbox-input-size);
+	height: var(--checkbox-input-size);
+}
+
+@each $color in map.keys(variables.$theme-colors) {
+	.check-radio--#{$color} {
+		--checkbox-input-color: var(--color-#{$color});
+	}
+}
+
+.check-radio--invalid {
+	--checkbox-input-color: var(--color-error);
+}
+
+.check-radio-group {
+	--check-radio-group-margin-bottom: var(--spacer-8);
+	--check-radio-group-label-margin-bottom: var(--spacer-2);
+
+	border: 0;
+	padding: 0;
+	margin: 0 0 var(--check-radio-group-margin-bottom) 0;
+}
+
+.check-radio-group__label {
+	margin-bottom: var(--check-radio-group-label-margin-bottom);
+
+	font-weight: bold;
+}
+
+.standalone-checkbox {
+	--checkbox-margin-bottom: var(--spacer-8);
+
+	margin-bottom: var(--checkbox-margin-bottom);
+}
+
+// endregion
+
+

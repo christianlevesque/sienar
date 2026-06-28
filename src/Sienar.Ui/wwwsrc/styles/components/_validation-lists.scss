@@ -1,0 +1,31 @@
+﻿.validation-list {
+	padding: 0;
+	list-style: none;
+}
+
+.validation-list__result {
+	--validation-result-margin-bottom: var(--spacer-2);
+	--validation-result-text-color: var(--color-heavy);
+
+	color: var(--validation-result-text-color);
+	margin-bottom: var(--validation-result-margin-bottom);
+
+	display: flex;
+	align-items: center;
+}
+
+.validation-list__result--valid {
+	--validation-result-text-color: var(--color-success);
+}
+
+.validation-list__result--invalid {
+	--validation-result-text-color: var(--color-error);
+}
+
+.validation-list__result-icon {
+	--validation-result-icon-font-size: 1.75rem;
+	--validation-result-icon-padding-right: var(--spacer-4);
+
+	font-size: var(--validation-result-icon-font-size);
+	padding-right: var(--validation-result-icon-padding-right);
+}

@@ -1,0 +1,37 @@
+﻿@use '../mixins';
+
+.modal-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+}
+
+.modal-container__modal-wrapper {
+	position: fixed;
+	top: var(--spacer-4);
+	left: var(--spacer-4);
+	width: calc(100vw - (2 * var(--spacer-4)));
+	height: 0;
+	overflow: visible;
+	z-index: 1000;
+
+	@include mixins.fade-in('modal', 1);
+}
+
+.modal {
+	position: relative;
+	background-color: var(--color-white);
+	border-radius: var(--border-radius);
+	z-index: 1002;
+
+}
+
+.modal__card-header--has-title {
+	border-bottom: 1px solid var(--color-heavy-transparent);
+}
+
+.modal__title {
+	font-size: 1rem;
+	margin: 0;
+}

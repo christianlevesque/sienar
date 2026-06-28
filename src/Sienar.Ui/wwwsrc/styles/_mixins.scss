@@ -1,0 +1,76 @@
+﻿@use 'sass:map';
+@use 'variables';
+@use 'functions';
+
+@mixin make-button($var-prefix) {
+	--#{$var-prefix}-background-color: transparent;
+	--#{$var-prefix}-border-color: transparent;
+	--#{$var-prefix}-border-style: solid;
+	--#{$var-prefix}-border-width: 1px;
+	--#{$var-prefix}-padding-x: var(--spacer-2);
+	--#{$var-prefix}-padding-y: var(--spacer-2);
+	--#{$var-prefix}-text-color: var(--color-heavy);
+
+	background-color: var(--#{$var-prefix}-background-color);
+	border-color: var(--#{$var-prefix}-border-color);
+	border-radius: var(--#{$var-prefix}-border-radius);
+	border-style: var(--#{$var-prefix}-border-style);
+	border-width: var(--#{$var-prefix}-border-width);
+	color: var(--#{$var-prefix}-text-color);
+	padding: var(--#{$var-prefix}-padding-y) var(--#{$var-prefix}-padding-x);
+
+	transition:
+		border-color var(--transition),
+		background-color var(--transition),
+		color var(--transition);
+
+	&:hover {
+		--#{$var-prefix}-background-color: var(--color-heavy-transparent);
+	}
+
+	@each $color in map.keys(variables.$theme-colors) {
+		&#{&}--#{$color} {
+			--#{$var-prefix}-text-color: var(--color-#{$color});
+
+			&:hover {
+				--#{$var-prefix}-background-color: var(--color-#{$color}-transparent);
+			}
+		}
+	}
+}
+
+@mixin fade-in($name, $visible-opacity: 1) {
+	display: none;
+	opacity: 0;
+	animation: #{$name}-fade-out var(--transition) forwards;
+
+	&#{&}--visible {
+		display: block;
+		opacity: #{$visible-opacity};
+		animation: #{$name}-fade-in var(--transition) forwards;
+	}
+
+	@keyframes #{$name}-fade-in {
+		from {
+			opacity: 0;
+			display: none;
+		}
+
+		to {
+			opacity: #{$visible-opacity};
+			display: block;
+		}
+	}
+
+	@keyframes #{$name}-fade-out {
+		from {
+			opacity: #{$visible-opacity};
+			display: block;
+		}
+
+		to {
+			opacity: 0;
+			display: none;
+		}
+	}
+}

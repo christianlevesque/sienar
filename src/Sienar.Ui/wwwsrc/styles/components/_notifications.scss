@@ -1,0 +1,65 @@
+﻿@use 'sass:map';
+@use '../variables';
+@use '..ddd/functions';
+
+.notifications {
+	position: absolute;
+	top: var(--spacer-4);
+	right: var(--spacer-4);
+	width: 0;
+	height: 0;
+	overflow: visible;
+	z-index: 1000;
+}
+
+.notifications__notification {
+	--notification-border-style: solid;
+	--notification-border-width: 1px;
+	--notification-margin-bottom: var(--spacer-2);
+	--notification-padding-x: var(--spacer-2);
+	--notification-padding-y: var(--spacer-2);
+	box-shadow: var(--box-shadow) var(--color-heavy);
+
+	background-color: var(--notification-background-color);
+	border-color: var(--notification-border-color);
+	border-style: var(--notification-border-style);
+	border-width: var(--notification-border-width);
+	color: var(--notification-text-color);
+	margin-bottom: var(--notification-margin-bottom);
+	padding: var(--notification-padding-y) var(--notification-padding-x);
+
+	transform: translateX(-100%);
+	display: flex;
+	min-width: 250px;
+	flex-direction: row;
+}
+
+@each $color in map.keys(variables.$theme-colors) {
+	.notifications__notification--#{$color} {
+		--notification-background-color: var(--color-#{$color});
+		--notification-border-color: var(--color-#{$color});
+		--notification-text-color: #{functions.get-contrasting-text-color($color)};
+
+		& .dismiss-button--#{$color} {
+			--dismiss-button-text-color: #{functions.get-contrasting-text-color($color)};
+			&:hover {
+				--dismiss-button-background-color: var(--color-light-transparent);
+			}
+		}
+	}
+}
+
+.notifications__notification-icon,
+.notifications__notification-message,
+.notifications__notification-close-button-wrapper {
+	display: flex;
+	align-items: center;
+}
+
+.notifications__notification-icon {
+	font-size: 2rem;
+}
+
+.notifications__notification-message {
+	padding: 0 var(--notification-padding-x);
+}

@@ -1,0 +1,10 @@
+﻿global using Microsoft.AspNetCore.Html;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using Microsoft.AspNetCore.Mvc.ViewFeatures;
+global using Microsoft.AspNetCore.Razor.TagHelpers;
+global using System;
+global using System.Text;
+global using System.Text.Encodings.Web;
+global using System.Threading.Tasks;
+global using Sienar.Ui;
+global using Sienar.Ui.TagHelpers;

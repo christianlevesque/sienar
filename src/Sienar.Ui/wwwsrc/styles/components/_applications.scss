@@ -1,0 +1,110 @@
+﻿@use 'sass:map';
+@use '@ui/styles/variables';
+@use '@ui/styles/functions';
+
+.app {
+	--app-background-color: var(--color-light);
+
+	background-color: var(--app-background-color);
+
+	width: 100%;
+	overflow-x: hidden;
+}
+
+.app__appbar {
+	--appbar-background-color: var(--color-white);
+	--appbar-border-color: transparent;
+	--appbar-border-style: solid;
+	--appbar-border-width: 1px;
+	--appbar-min-height: 64px;
+	--appbar-padding-x: var(--spacer-2);
+	--appbar-padding-y: var(--spacer-2);
+	--appbar-text-color: var(--heavy);
+
+	background-color: var(--appbar-background-color);
+	border-bottom-color: var(--appbar-border-color);
+	border-bottom-style: var(--appbar-border-style);
+	border-bottom-width: var(--appbar-border-width);
+	color: var(--appbar-text-color);
+	min-height: var(--appbar-min-height);
+	padding: var(--appbar-padding-y) var(--appbar-padding-x);
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+$width: 250px;
+
+.app__sidebar {
+	--sidebar-background-color: var(--color-white);
+	--sidebar-border-color: transparent;
+	--sidebar-border-style: solid;
+	--sidebar-border-width: 1px;
+	--sidebar-padding-x: var(--spacer-2);
+	--sidebar-padding-y: var(--spacer-2);
+	--sidebar-text-color: var(--var-heavy);
+
+	background-color: var(--sidebar-background-color);
+	border-right-color: var(--sidebar-border-color);
+	border-right-style: var(--sidebar-border-style);
+	border-right-width: var(--sidebar-border-width);
+	color: var(--sidebar-text-color);
+	padding: var(--sidebar-padding-y) var(--sidebar-padding-x);
+
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	max-width: 90%;
+	flex-shrink: 0;
+	display: flex;
+	flex-direction: column;
+	z-index: 1;
+	width: #{$width};
+	transform: translateX(-101%);
+	transition: transform var(--transition);
+}
+
+.app__sidebar--open {
+	transform: translateX(0);
+}
+
+.app__window {
+	position: relative;
+	z-index: 0;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	min-height: 100vh;
+
+	// Without this line, .app__window will probably overflow the window and take up however much width it wants because flex children have min-width: auto by default
+	min-width: 0;
+}
+
+.app__main--sidebar-open {
+	overflow-y: hidden;
+	height: 100%;
+}
+
+@each $color in map.keys(variables.$theme-colors) {
+	.app__appbar--#{$color} {
+		--appbar-background-color: var(--color-#{$color});
+		--appbar-border-color: var(--color-#{$color});
+		--appbar-text-color: #{functions.get-contrasting-text-color($color)};
+	}
+
+	.app__sidebar--#{$color} {
+		--sidebar-background-color: var(--color-#{$color});
+		--sidebar-border-color: var(--color-#{$color});
+		--sidebar-text-color: #{functions.get-contrasting-text-color($color)};
+	}
+}
+
+@media (min-width: #{map.get(variables.$breakpoints, 'lg')}) {
+	.app__sidebar {
+		position: relative;
+		transform: translateX(0);
+	}
+}

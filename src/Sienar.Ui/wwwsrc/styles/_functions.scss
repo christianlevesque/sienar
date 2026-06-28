@@ -1,0 +1,19 @@
+﻿@use 'sass:color';
+@use 'sass:map';
+@use 'variables';
+
+@function get-contrasting-text-color($color, $shade: 'default') {
+	$color-map: map.get(variables.$theme-colors, $color);
+	$actual-color: '';
+	@if (map.has-key($color-map, $shade)) {
+		$actual-color: map.get($color-map, $shade);
+	} @else {
+		$actual-color: map.get($color-map, 'default');
+	}
+
+	@if (color.channel($actual-color, 'lightness', $space: hsl) > 70%) {
+		@return var(--color-heavy);
+	} @else {
+		@return var(--color-white);
+	}
+}
