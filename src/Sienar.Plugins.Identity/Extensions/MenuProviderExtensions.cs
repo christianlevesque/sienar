@@ -18,7 +18,7 @@ public static class MenuProviderExtensions
 				new MenuLink
 				{
 					Text = "Dashboard",
-					Icon = "hdd-stack-fill",
+					Icon = "view-dashboard",
 					Url = DashboardUrls.Index,
 					RequireLoggedIn = false
 				});

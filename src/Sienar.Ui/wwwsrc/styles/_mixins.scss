@@ -29,7 +29,7 @@
 	}
 
 	@each $color in map.keys(variables.$theme-colors) {
-		&#{&}--#{$color} {
+		&.#{$color} {
 			--#{$var-prefix}-text-color: var(--color-#{$color});
 
 			&:hover {

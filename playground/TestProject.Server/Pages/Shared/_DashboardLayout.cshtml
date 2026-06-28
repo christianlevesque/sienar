@@ -25,18 +25,14 @@
 	class="app d-flex flex-row">
 	<div class="sidebar">
 		<div class="flex-grow-1">
-			<ul class="menu menu--heavy">
+			<ul class="menu heavy">
 				@foreach (var menu in menus)
 				{
-					<li class="menu__item menu__item--heavy">
-						<a
-							class="menu__item-button"
-							href="@menu.Url">
+					<li>
+						<a href="@menu.Url">
 							@if (!string.IsNullOrEmpty(menu.Icon))
 							{
-								<span class="menu__item-icon">
-									<i class="mr-4 mdi mdi-@menu.Icon"></i>
-								</span>
+								<span class="mdi mdi-@menu.Icon"></span>
 							}
 
 							@menu.Text

@@ -22,53 +22,48 @@
 	margin: 0;
 	padding: var(--menu-list-padding-y) var(--menu-list-padding-x);
 	list-style: none;
-}
 
-.menu__item {
-	cursor: pointer;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+	& > li {
+		cursor: pointer;
+		//overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 
-	@include mixins.make-button('menu');
-}
+		& > hr {
+			--menu-hr-color: var(--color-heavy-lighten);
 
-.menu__item--divider {
-	border: 0;
-	padding: 0;
-	margin: var(--spacer-1) var(--spacer-n1);
+			margin: var(--spacer-1) var(--spacer-n3);
+			border-top: 1px solid var(--menu-hr-color);
+			border-left: none;
+			border-right: none;
+			border-bottom: none;
 
-	hr {
-		margin: 0;
-		border-left: none;
-		border-right: none;
-		border-bottom: none;
-	}
-}
+			@each $color in map.keys(variables.$theme-colors) {
+				.menu__item--#{$color}.menu__item--divider hr {
+					border-top: 1px solid var(--color-#{$color}-lighten);
+				}
+			}
+		}
 
-.menu__item-button {
-	display: block;
-	text-decoration: none;
-	background: transparent;
-	border: none;
+		& > a, & > button {
+			display: block;
+			text-decoration: none;
+			background: transparent;
+			border: none;
+			overflow: hidden;
 
-	&, &:hover, &:active {
-		color: inherit;
-	}
-}
+			@include mixins.make-button('menu');
 
-.menu__item-icon {
-	display: inline-block;
-	width: 45px;
-	text-align: center;
+			&, &:hover, &:active {
+				color: inherit;
+			}
 
-	.icon {
-		font-size: 20px;
-	}
-}
-
-@each $color in map.keys(variables.$theme-colors) {
-	.menu__item--#{$color}.menu__item--divider hr {
-		border-top: 1px solid var(--color-#{$color}-lighten);
+			& > .mdi {
+				display: inline-block;
+				width: 45px;
+				text-align: center;
+				font-size: 20px;
+			}
+		}
 	}
 }
