@@ -25,7 +25,7 @@
 	class="app d-flex flex-row">
 	<div class="sidebar">
 		<div class="flex-grow-1">
-			<ul class="menu heavy">
+			<ul class="menu primary">
 				@foreach (var menu in menus)
 				{
 					<li>
@@ -46,7 +46,7 @@
 			@if (UserAccessor.IsSignedIn())
 			{
 				<a
-					class="button button--primary d-block"
+					class="btn primary d-block"
 					asp-area="Dashboard"
 					asp-page="/Account/LogOut">
 					Log out
