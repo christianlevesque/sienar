@@ -6,9 +6,6 @@
 public class WebApplicationAdapter : IApplicationAdapter<WebApplicationBuilder>
 {
 	/// <inheritdoc />
-	public ApplicationType ApplicationType => ApplicationType.Server;
-
-	/// <inheritdoc />
 	public WebApplicationBuilder Builder { get; private set; } = null!;
 
 	/// <inheritdoc />

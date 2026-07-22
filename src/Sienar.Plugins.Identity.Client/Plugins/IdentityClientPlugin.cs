@@ -1,6 +1,5 @@
 ﻿using Sienar.Layouts;
 using Sienar.Ui.Views;
-using static Sienar.Infrastructure.ApplicationType;
 
 namespace Sienar.Plugins;
 
@@ -60,9 +59,6 @@ public class IdentityClientPlugin : IPlugin
 			.TryAddComponent<DrawerHeader>(DashboardLayoutSections.SidebarHeader)
 			.TryAddComponent<DrawerFooter>(DashboardLayoutSections.SidebarFooter);
 
-		_globalComponentProvider.DefaultLayout ??= typeof(DashboardLayout);
-		_globalComponentProvider.NotFoundView ??= typeof(NotFound);
-		_globalComponentProvider.UnauthorizedView ??= typeof(Unauthorized);
 		_globalComponentProvider.DefaultMenus = [IdentityMenus.Main, IdentityMenus.Info];
 	}
 
@@ -101,25 +97,24 @@ public class IdentityClientPlugin : IPlugin
 
 	private void SetupServices()
 	{
-		if (_adapter.ApplicationType is not Client) return;
-
+		// Client only
 		_adapter.AddServices(s =>
 		{
 			// Infrastructure
 			s
-				.AddBeforeStatusActionHook<LoadUserDataOnStartup, Startup>(Client);
+				.AddBeforeStatusActionHook<LoadUserDataOnStartup, Startup>();
 
 			s.TryAddScoped<INotifier, DefaultNotifier>();
 			s.TryAddScoped<IUserClaimsFactory<ViewUserDto>, ClientUserClaimsFactory>();
 
 			s
 				// Account
-				.AddAfterGeneralActionHook<LoadUserDataOnLogin, LoginRequest>(Client)
-				.AddAfterGeneralActionHook<RefreshCsrfTokenOnLogin, LoginRequest>(Client)
-				.AddAfterStatusActionHook<LogOutUiAfterLogout, LogoutRequest>(Client)
-				.AddAfterStatusActionHook<RefreshCsrfTokenOnLogout, LogoutRequest>(Client)
-				.AddStateValidator<EnsureTosAccepted, RegisterRequest>(Client)
-				.AddAfterStatusActionHook<LogOutAfterDeletingAccount, DeleteAccountRequest>(Client);
+				.AddAfterGeneralActionHook<LoadUserDataOnLogin, LoginRequest>()
+				.AddAfterGeneralActionHook<RefreshCsrfTokenOnLogin, LoginRequest>()
+				.AddAfterStatusActionHook<LogOutUiAfterLogout, LogoutRequest>()
+				.AddAfterStatusActionHook<RefreshCsrfTokenOnLogout, LogoutRequest>()
+				.AddStateValidator<EnsureTosAccepted, RegisterRequest>()
+				.AddAfterStatusActionHook<LogOutAfterDeletingAccount, DeleteAccountRequest>();
 
 			s.ApplyDefaultConfiguration<SienarOptions>(
 				_configuration.GetSection("Sienar:Core"));

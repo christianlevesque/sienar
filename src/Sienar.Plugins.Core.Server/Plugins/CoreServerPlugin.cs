@@ -24,7 +24,7 @@ public class CoreServerPlugin : IPlugin
 		{
 			sp
 				.AddEntityFramework()
-				.AddBeforeStatusActionHook<EnsureBaseDirectoryCreated, Startup>(ApplicationType.Server);
+				.AddBeforeStatusActionHook<EnsureBaseDirectoryCreated, Startup>();
 		});
 	}
 

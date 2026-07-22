@@ -9,8 +9,6 @@ namespace Sienar.Infrastructure;
 /// </summary>
 public class WasmApplicationAdapter : IApplicationAdapter<WebAssemblyHostBuilder>
 {
-	/// <inheritdoc />
-	public ApplicationType ApplicationType => ApplicationType.Client;
 
 	/// <inheritdoc />
 	public WebAssemblyHostBuilder Builder { get; private set; } = null!;

@@ -1,12 +1,5 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using Sienar.Configuration;
-using Sienar.Data;
-using Sienar.Extensions;
-using Sienar.Infrastructure;
-using Sienar.Security;
-using static Sienar.Infrastructure.ApplicationType;
 
 namespace Sienar.Plugins;
 
@@ -49,11 +42,7 @@ public class CoreClientPlugin : IPlugin
 				.AddSingleton(_sp.GetRequiredService<RoutableAssemblyProvider>())
 				.AddSingleton(_sp.GetRequiredService<LayoutProvider>());
 
-			if (_adapter.ApplicationType is not Client)
-			{
-				return;
-			}
-
+			// Client only
 			services.TryAddScoped<IUserAccessor, BlazorUserAccessor>();
 
 			services
@@ -61,16 +50,14 @@ public class CoreClientPlugin : IPlugin
 				.AddSienarBlazorUtilities()
 				.AddCookieRestClient()
 				.AddRestfulEntities()
-				.AddBeforeStatusActionHook<AddCsrfTokenToHttpRequestHook, RestClientRequest<CookieRestClient>>(Client)
-				.AddBeforeStatusActionHook<RefreshCsrfTokenOnStartup, Startup>(Client)
+				.AddBeforeStatusActionHook<AddCsrfTokenToHttpRequestHook, RestClientRequest<CookieRestClient>>()
+				.AddBeforeStatusActionHook<RefreshCsrfTokenOnStartup, Startup>()
 				.AddScoped(
 					typeof(IGeneralProcessor<,>),
-					typeof(DefaultClientGeneralProcessor<,>),
-					Client)
+					typeof(DefaultClientGeneralProcessor<,>))
 				.AddScoped(
 					typeof(IStatusProcessor<>),
-					typeof(DefaultClientStatusProcessor<>),
-					Client);
+					typeof(DefaultClientStatusProcessor<>));
 		});
 	}
 
