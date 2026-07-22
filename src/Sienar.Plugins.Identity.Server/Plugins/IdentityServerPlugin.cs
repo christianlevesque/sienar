@@ -12,28 +12,15 @@ public class IdentityServerPlugin<TUser> : IPlugin
 	where TUser : class, ISienarIdentityUser<TUser>, new()
 {
 	private readonly WebApplicationBuilder _builder;
-	private readonly PluginDataProvider _pluginDataProvider;
 
 	public IdentityServerPlugin(
-		WebApplicationBuilder builder,
-		PluginDataProvider pluginDataProvider)
+		WebApplicationBuilder builder)
 	{
 		_builder = builder;
-		_pluginDataProvider = pluginDataProvider;
 	}
 
 	public void Configure()
 	{
-		_pluginDataProvider.Add(new PluginData
-		{
-			Name = "Sienar Core - REST API",
-			Description = "Configures Sienar as a collection of REST API endpoints that can be used as a backend for desktop applications, mobile apps, or JavaScript/WebAssembly SPAs.",
-			Author = "Christian LeVesque",
-			AuthorUrl = "https://levesque.dev",
-			Homepage = "https://sienar.io",
-			Version = Version.Parse("0.1.1")
-		});
-
 		var services = _builder.Services;
 		var config = _builder.Configuration;
 

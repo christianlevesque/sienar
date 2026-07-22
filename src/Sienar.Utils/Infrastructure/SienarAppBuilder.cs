@@ -23,7 +23,6 @@ public sealed class SienarAppBuilder
 
 		_startupServices
 			.AddSingleton<MenuProvider>()
-			.AddSingleton<PluginDataProvider>()
 			.AddSingleton<ScriptProvider>()
 			.AddSingleton<StyleProvider>()
 			.AddSingleton<RoleProvider>();
@@ -119,7 +118,6 @@ public sealed class SienarAppBuilder
 		{
 			services
 				.AddSingleton(sp.GetRequiredService<MenuProvider>())
-				.AddSingleton(sp.GetRequiredService<PluginDataProvider>())
 				.AddSingleton(sp.GetRequiredService<ScriptProvider>())
 				.AddSingleton(sp.GetRequiredService<StyleProvider>())
 				.AddSingleton(sp.GetRequiredService<RoleProvider>());

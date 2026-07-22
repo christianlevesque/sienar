@@ -1,5 +1,4 @@
-﻿using System;
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sienar.Extensions;
@@ -15,34 +14,21 @@ public class MailKitPlugin : IPlugin
 {
 	private readonly IApplicationAdapter _adapter;
 	private readonly IConfiguration _configuration;
-	private readonly PluginDataProvider _pluginDataProvider;
 
 	/// <summary>
 	/// Creates a new instance of <c>MailKitPlugin</c>
 	/// </summary>
 	public MailKitPlugin(
 		IApplicationAdapter adapter,
-		IConfiguration configuration,
-		PluginDataProvider pluginDataProvider)
+		IConfiguration configuration)
 	{
 		_adapter = adapter;
 		_configuration = configuration;
-		_pluginDataProvider = pluginDataProvider;
 	}
 
 	/// <inheritdoc />
 	public void Configure()
 	{
-		_pluginDataProvider.Add(new PluginData
-		{
-			Name = "Sienar MailKit",
-			Version = Version.Parse("0.1.1"),
-			Author = "Christian LeVesque",
-			AuthorUrl = "https://levesque.dev",
-			Description = "Sienar MailKit provides access to mail delivery services over SMTP using the MailKit library for .NET.",
-			Homepage = "https://sienar.io/plugins/mailkit"
-		});
-
 		_adapter.AddServices(sp =>
 		{
 			sp
