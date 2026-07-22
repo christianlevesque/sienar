@@ -8,6 +8,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="RazorForms.Bootstrap5" Version="2.0.0"/>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\..\src\Sienar.Ui\Sienar.Ui.csproj" />
 		<ProjectReference Include="..\..\src\Sienar.Plugins.Identity\Sienar.Plugins.Identity.csproj" />
 		<ProjectReference Include="..\..\src\Sienar.Plugins.MailKit\Sienar.Plugins.MailKit.csproj" />
