@@ -59,13 +59,13 @@ public class CoreBlazorPlugin : IPlugin
 			Priority.Lowest,
 			app =>
 			{
-				var blazorEndpointBuilder = app.MapRazorComponents<SienarApp>()
-					.AddInteractiveWebAssemblyRenderMode();
+				// var blazorEndpointBuilder = app.MapRazorComponents<SienarApp>()
+				// 	.AddInteractiveWebAssemblyRenderMode();
 
-				foreach (var assembly in _routableAssemblyProvider)
-				{
-					blazorEndpointBuilder.AddAdditionalAssemblies(assembly);
-				}
+				// foreach (var assembly in _routableAssemblyProvider)
+				// {
+				// 	blazorEndpointBuilder.AddAdditionalAssemblies(assembly);
+				// }
 			});
 	}
 

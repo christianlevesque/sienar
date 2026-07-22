@@ -22,7 +22,6 @@ public sealed class SienarAppBuilder
 		_startupArgs = args ?? Environment.GetCommandLineArgs();
 
 		_startupServices
-			.AddSingleton<MenuProvider>()
 			.AddSingleton<ScriptProvider>()
 			.AddSingleton<StyleProvider>()
 			.AddSingleton<RoleProvider>();
@@ -117,7 +116,6 @@ public sealed class SienarAppBuilder
 		_adapter.AddServices(services =>
 		{
 			services
-				.AddSingleton(sp.GetRequiredService<MenuProvider>())
 				.AddSingleton(sp.GetRequiredService<ScriptProvider>())
 				.AddSingleton(sp.GetRequiredService<StyleProvider>())
 				.AddSingleton(sp.GetRequiredService<RoleProvider>());
