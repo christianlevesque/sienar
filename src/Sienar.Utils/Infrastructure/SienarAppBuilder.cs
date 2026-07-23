@@ -21,10 +21,7 @@ public sealed class SienarAppBuilder
 		_startupServices = new ServiceCollection();
 		_startupArgs = args ?? Environment.GetCommandLineArgs();
 
-		_startupServices
-			.AddSingleton<ScriptProvider>()
-			.AddSingleton<StyleProvider>()
-			.AddSingleton<RoleProvider>();
+		_startupServices.AddSingleton<RoleProvider>();
 	}
 
 	/// <summary>
@@ -115,10 +112,7 @@ public sealed class SienarAppBuilder
 
 		_adapter.AddServices(services =>
 		{
-			services
-				.AddSingleton(sp.GetRequiredService<ScriptProvider>())
-				.AddSingleton(sp.GetRequiredService<StyleProvider>())
-				.AddSingleton(sp.GetRequiredService<RoleProvider>());
+			services.AddSingleton(sp.GetRequiredService<RoleProvider>());
 		});
 
 		return await _adapter.Build<TApp>(sp);

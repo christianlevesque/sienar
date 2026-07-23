@@ -15,7 +15,6 @@ global using Sienar.Configuration;
 global using Sienar.Data;
 global using Sienar.Extensions;
 global using Sienar.Hooks;
-global using Sienar.Html;
 global using Sienar.Infrastructure;
 global using Sienar.Plugins;
 global using Sienar.Security;

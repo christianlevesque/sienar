@@ -15,7 +15,6 @@ global using Sienar.Data;
 global using Sienar.Errors;
 global using Sienar.Extensions;
 global using Sienar.Hooks;
-global using Sienar.Html;
 global using Sienar.Identity;
 global using Sienar.Identity.Hooks;
 global using Sienar.Identity.Requests;
